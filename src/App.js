@@ -1,15 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.scss";
+import { Routes, Route } from "react-router-dom";
+import NotFound from "./NotFound";
 import RecruitStatus from "./RecruitStatus";
 
 function App() {
   return (
-    <BrowserRouter>
       <Routes>
-        <Route path='/' element={<App />} />
+        <Route path='*' element={<NotFound />} />
         <Route path='/project' element={<RecruitStatus />} />
       </Routes>
-    </BrowserRouter>
   );
 }
 
