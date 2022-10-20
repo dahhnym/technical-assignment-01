@@ -1,0 +1,79 @@
+$border-grey :  #E1E3E9;
+$button-inactive: #F7F7FA;
+$button-active: #0067FF;
+$inactive-text-color: #9DA1A8;
+$table-header-text-color: #52565D;
+
+.header {
+    background-color: #0067ff;
+    color: #fff;
+    height: 3.75rem;
+    display: flex;
+    padding-left: 1.875rem;
+    align-items: center;
+}
+
+.logo {
+    width: 2.5rem;
+    margin-right: 5px;
+}
+
+.reviewer-board-wrapper {
+    border: solid 1px $border-grey;
+    width: 95%;
+    margin: 2.5rem auto 0;
+    background-color: #fff;
+}
+
+.tab-container {
+    border-bottom: solid 1px $border-grey;
+    display: flex;
+}
+
+.tab {
+    border-right: solid 1px $border-grey;
+    font-size: 1rem;
+    padding: 1.125rem  3rem;
+    color: $inactive-text-color;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.reviewer-list-container {
+    padding: 30px 0;
+}
+
+.reviewer-list {
+    border: solid 1px $border-grey;
+    width: 95%;
+    margin: 0 auto 20.5px;
+    overflow: hidden;
+}
+
+.table-header-container {
+    display: grid;
+    grid-template-columns: repeat(15, minmax(min-content, 100%));
+    width: 100%;
+    background-color: #F7F7FA;
+    border-bottom: solid 1px $border-grey;
+}
+
+.table-header-cell {
+    font-size: 0.875rem;
+    color: $table-header-text-color;
+    padding: 9px;
+    border-right: solid 1px $border-grey;
+}
+
+.submit-button {
+    display: block;
+    margin: 0 auto;
+    background-color: $button-inactive;
+    width: 104px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $inactive-text-color;
+}

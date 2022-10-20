@@ -14,3 +14,11 @@ li {
   padding: 0;
   list-style: none;
 }
+
+button {
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
