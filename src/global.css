@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'noto-sans-cjk-kr';
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/NotoSansCJKkr-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'noto-sans-cjk-kr';
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/NotoSansCJKkr-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'noto-sans-cjk-kr';
+  font-weight: 700;
+  font-display: swap;
+  src: url('./fonts/NotoSansCJKkr-Bold.otf') format('opentype');
+}
+
+body {
+  font-family: 'noto-sans-cjk-kr', sans-serif;
+}
