@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import './ReviewerList.scss';
 import { getReviewerListData } from '../../utils';
-import star from './../../assets/star.svg';
+import Star from './../../assets/star.svg';
+import ArrowRight from './../../assets/arrow-right.svg';
 
 const ReviewerList = ({ reviewerData }) => {
   const tableHeaderItems = [
@@ -20,6 +21,11 @@ const ReviewerList = ({ reviewerData }) => {
     'SNS 계정',
     '내 브랜드 참여',
   ];
+
+  const onCheckBoxClick = e => {
+    console.log(e.target.value);
+  };
+
   return (
     <div className="reviewer-list">
       <div className="table-header-container">
@@ -38,14 +44,18 @@ const ReviewerList = ({ reviewerData }) => {
             return (
               <div key={idx} className="table-body-row">
                 <div>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    value={data.id}
+                    onClick={onCheckBoxClick}
+                  />
                 </div>
                 <div>
                   {data.isBookmark ? (
                     '★'
                   ) : (
                     <a href="#">
-                      <img src={star} alt="즐겨찾기" />
+                      <img src={Star} alt="즐겨찾기" />
                     </a>
                   )}
                 </div>
@@ -73,6 +83,9 @@ const ReviewerList = ({ reviewerData }) => {
                         내용이 없습니다.
                       </span>
                     )}
+                    <div className="table-body-row_message-box-dropdown">
+                      {data.message}
+                    </div>
                   </div>
                 </div>
                 <div>{data.recommend}회</div>
@@ -88,7 +101,26 @@ const ReviewerList = ({ reviewerData }) => {
                     <span>보기</span>
                   </a>
                 </div>
-                <div>{data.brandRequestCounts}</div>
+                <div
+                  className={
+                    data.brandRequestCounts !== 0
+                      ? 'table-body-row_count-valid'
+                      : ''
+                  }
+                >
+                  {data.brandRequestCounts === 0 ? (
+                    '-'
+                  ) : (
+                    <>
+                      {data.brandRequestCounts}회
+                      <img
+                        src={ArrowRight}
+                        alt=""
+                        style={{ marginLeft: '0.3rem' }}
+                      />
+                    </>
+                  )}
+                </div>
               </div>
             );
           })}

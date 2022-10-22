@@ -2,16 +2,22 @@
 
 $grid-cols: repeat(4, 1fr) 13rem repeat(3, 1fr) 10rem 33rem repeat(2, 1fr)
   6.6rem 5.875rem 6.6rem;
+$table-row-active: #f7faff;
+$text-highlight: #0067ff;
+$tab-active: #f0f3ff;
+$table-header-text-color: #52565d;
+$table-body-text-color: #202225;
+$message-box-height: 1.93rem;
 
 .reviewer-list {
   border: solid 1px $border-grey;
   width: 95%;
   margin: 0 auto 20.5px;
+  font-weight: 0.875rem;
 }
 
 .table-header-container {
   display: grid;
-  // grid-template-columns: repeat(15, 1fr);
   grid-template-columns: $grid-cols;
   width: 100%;
   background-color: #f7f7fa;
@@ -43,6 +49,7 @@ $grid-cols: repeat(4, 1fr) 13rem repeat(3, 1fr) 10rem 33rem repeat(2, 1fr)
   grid-template-columns:
     repeat(4, 1fr) 13rem repeat(3, 1fr) 10rem 33rem repeat(2, 1fr)
     6.6rem 5.875rem 5.5rem;
+  color: $table-body-text-color;
   & > div {
     border-right: solid 1px $border-grey;
     display: flex;
@@ -50,6 +57,13 @@ $grid-cols: repeat(4, 1fr) 13rem repeat(3, 1fr) 10rem 33rem repeat(2, 1fr)
     align-items: center;
     height: 3rem;
   }
+  &:hover {
+    background-color: $table-row-active;
+  }
+}
+// 체크박스 체크시
+.table-body-row_selected {
+  background-color: $table-row-active;
 }
 
 .button-view-sns {
@@ -62,12 +76,15 @@ $grid-cols: repeat(4, 1fr) 13rem repeat(3, 1fr) 10rem 33rem repeat(2, 1fr)
 }
 
 .message-box {
+  position: relative;
   border: solid 1px $border-grey;
   border-radius: 5px;
   width: 95%;
-  height: 1.93rem;
-  padding: 6.5px 11px;
+  height: $message-box-height;
+  padding-right: 11px;
   text-align: left;
+  background-color: #fff;
+  cursor: default;
   &::before {
     display: block;
     content: '';
@@ -75,6 +92,10 @@ $grid-cols: repeat(4, 1fr) 13rem repeat(3, 1fr) 10rem 33rem repeat(2, 1fr)
     height: 1rem;
     background: no-repeat center url('./../../assets/arrow-down.svg');
     float: right;
+    margin-top: 6.5px;
+  }
+  &:hover::before {
+    cursor: pointer;
   }
 }
 
@@ -83,8 +104,40 @@ $grid-cols: repeat(4, 1fr) 13rem repeat(3, 1fr) 10rem 33rem repeat(2, 1fr)
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 90%;
+  margin-left: 11px;
+  font-weight: 500;
+  line-height: $message-box-height;
 }
 
 .table-body-row_message-invalid {
   color: $inactive-text-color;
+  margin-left: 11px;
+}
+
+.table-body-row_message-box-dropdown {
+  display: none;
+  position: absolute;
+  top: 120%;
+  width: 100%;
+  z-index: 10;
+  border: solid 1px $border-grey;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 6.5px 11px;
+  font-size: 0.75rem;
+}
+
+.visible {
+  display: block;
+}
+
+.table-body-row_count-valid {
+  color: $text-highlight;
+  font-weight: 500;
+}
+
+.tab_active {
+  background-color: $tab-active;
+  color: $text-highlight;
+  font-weight: 500;
 }
