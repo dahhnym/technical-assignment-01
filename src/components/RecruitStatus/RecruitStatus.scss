@@ -41,6 +41,14 @@ $inactive-text-color: #9da1a8;
 
 .reviewer-list-container {
   padding: 30px 0;
+  height: 43rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .reviewer-list_no-reviewer {
+    color: $inactive-text-color;
+  }
 }
 
 .submit-button {

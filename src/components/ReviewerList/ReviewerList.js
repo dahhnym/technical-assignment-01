@@ -3,8 +3,9 @@ import './ReviewerList.scss';
 import { getReviewerListData } from '../../utils';
 import Star from './../../assets/star.svg';
 import ArrowRight from './../../assets/arrow-right.svg';
+import { Link } from 'react-router-dom';
 
-const ReviewerList = ({ reviewerData }) => {
+const ReviewerList = ({ reviewerData, setModalOpen }) => {
   const tableHeaderItems = [
     '별표',
     'NO',
@@ -22,8 +23,14 @@ const ReviewerList = ({ reviewerData }) => {
     '내 브랜드 참여',
   ];
 
+  const [clicked, setClicked] = useState(false);
+
   const onCheckBoxClick = e => {
     console.log(e.target.value);
+  };
+
+  const onBrandRequestHistoryClick = ({ setModalOpen }) => {
+    console.log('clicked!');
   };
 
   return (
@@ -98,27 +105,28 @@ const ReviewerList = ({ reviewerData }) => {
                     rel="noreferrer"
                     className="button-view-sns"
                   >
-                    <span>보기</span>
+                    보기
                   </a>
                 </div>
-                <div
-                  className={
-                    data.brandRequestCounts !== 0
-                      ? 'table-body-row_count-valid'
-                      : ''
-                  }
-                >
+                <div>
                   {data.brandRequestCounts === 0 ? (
                     '-'
                   ) : (
-                    <>
+                    <button
+                      className={
+                        data.brandRequestCounts !== 0
+                          ? 'table-body-row_count-valid'
+                          : ''
+                      }
+                      onClick={() => setModalOpen(prev => !prev)}
+                    >
                       {data.brandRequestCounts}회
                       <img
                         src={ArrowRight}
                         alt=""
                         style={{ marginLeft: '0.3rem' }}
                       />
-                    </>
+                    </button>
                   )}
                 </div>
               </div>

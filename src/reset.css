@@ -11,7 +11,7 @@ body,
 ul,
 li,
 div,
-p {
+p, button, h1, h2 {
   margin: 0;
   padding: 0;
 }
@@ -23,6 +23,7 @@ li {
 
 button {
   border: none;
+  background-color: transparent;
 }
 
 button:hover {
@@ -35,4 +36,9 @@ a {
 
 div {
   box-sizing: border-box;
+}
+
+h1, h2 {
+    font-size: initial;
+    font-weight: initial;
 }
