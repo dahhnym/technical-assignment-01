@@ -2,8 +2,7 @@ import Logo from './../../assets/logo.svg';
 import './RecruitStatus.scss';
 import ReviewerList from '../ReviewerList/ReviewerList';
 import { useEffect, useState } from 'react';
-import { getProjectInfo, getReviewerListData } from '../../utils';
-import BrandRequestHistoryModal from '../BrandRequestHistoryModal/BrandRequestHistoryModal';
+import { getProjectInfo, getReviewerData } from '../../utils';
 
 const RecruitStatus = () => {
   const selectedReviewer = 0;
@@ -25,13 +24,14 @@ const RecruitStatus = () => {
         setProjectId(info);
       }
     };
-    const fetchReviewerData = async () => {
-      const result = await getReviewerListData();
-      if (result) {
-        setData(result);
+    const fetchReviewerList = async () => {
+      const data = await getReviewerData();
+      if (data) {
+        setData(data);
       }
     };
-    fetchReviewerData();
+
+    fetchReviewerList();
     fetchProjectInfo();
   }, []);
 
@@ -64,6 +64,7 @@ const RecruitStatus = () => {
               <ReviewerList
                 reviewerData={reviewerData}
                 setModalOpen={setModalOpen}
+                modalOpen={modalOpen}
               />
               <button className="submit-button">선정하기</button>
             </>
@@ -73,7 +74,6 @@ const RecruitStatus = () => {
           )}
         </div>
       </section>
-      {modalOpen && <BrandRequestHistoryModal setModalOpen={setModalOpen} />}
     </div>
   );
 };
