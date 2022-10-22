@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { getProjectInfo, getReviewerListData } from '../../utils';
 
 const RecruitStatus = () => {
-  const numberOfReviewer = 10;
   const selectedReviewer = 0;
 
   const [projectId, setProjectId] = useState(0);
@@ -36,7 +35,9 @@ const RecruitStatus = () => {
       </header>
       <div className="reviewer-board-wrapper">
         <ul className="tab-container">
-          <li className="tab">신청 리뷰어 &#40;{reviewerData.length}&#41;</li>
+          <li className="tab tab_active">
+            신청 리뷰어 &#40;{reviewerData.length}&#41;
+          </li>
           <li className="tab">선정 리뷰어&#40;{selectedReviewer}&#41;</li>
         </ul>
         <div className="reviewer-list-container">
