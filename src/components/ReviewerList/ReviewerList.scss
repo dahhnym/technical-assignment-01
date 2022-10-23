@@ -61,8 +61,9 @@ $message-box-height: 1.93rem;
     background-color: $table-row-active;
   }
 }
+
 // 체크박스 체크시
-.table-body-row_selected {
+.table-body-row_checked {
   background-color: $table-row-active;
 }
 
@@ -73,6 +74,7 @@ $message-box-height: 1.93rem;
   width: 4.375rem;
   height: 2rem;
   border-radius: 5px;
+  line-height: 2rem;
 }
 
 .message-box {
@@ -87,10 +89,9 @@ $message-box-height: 1.93rem;
 }
 
 .button-dropdown {
-  border: solid 1px red;
   position: absolute;
-  top: 0;
-  right: 13px;
+  top: 13px;
+  right: 15px;
   width: 0.8rem;
   height: 0.5rem;
 }
@@ -146,4 +147,48 @@ $message-box-height: 1.93rem;
   background-color: $tab-active;
   color: $text-highlight;
   font-weight: 500;
+}
+
+@mixin button-inactive {
+  margin: 0 auto;
+  background-color: $button-bg-color-inactive;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text-color-inactive;
+  &:hover {
+    cursor: default;
+  }
+}
+
+@mixin button-active-white {
+  margin: 0 auto;
+  background-color: #fff;
+  border: solid 1px $border-grey;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text-color-black;
+}
+
+@mixin button-active-blue {
+  display: block;
+  margin: 0 auto;
+  background-color: $color-active;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.button-inactive {
+  height: 50px;
+  padding: 0 22px;
+  @include button-inactive;
+}
+
+.button-active {
+  height: 50px;
+  padding: 0 22px;
+  @include button-active-blue;
 }

@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './ReviewerList.scss';
 import Star from './../../assets/star.svg';
 import ArrowRight from './../../assets/arrow-right.svg';
-import ArrowDown from './../../assets/arrow-down.svg';
-import ArrowUp from './../../assets/arrow-up.svg';
 import BrandRequestHistoryModal from '../BrandRequestHistoryModal/BrandRequestHistoryModal';
 
-const ReviewerList = ({ reviewerData, setModalOpen, modalOpen }) => {
+const ReviewerList = ({
+  reviewerData,
+  setModalOpen,
+  modalOpen,
+  maxRecruits,
+}) => {
   const tableHeaderItems = [
     '별표',
     'NO',
@@ -25,8 +28,11 @@ const ReviewerList = ({ reviewerData, setModalOpen, modalOpen }) => {
   ];
 
   const [reviewerInfo, setReviewerInfo] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState(6);
+  const [selectedId, setSelectedId] = useState(0);
+  const [checkedId, setCheckedId] = useState(0);
+  const [checkedIdArr, setCheckedIdArr] = useState([]);
+
+  useEffect(() => {}, [checkedIdArr, checkedId]);
 
   const handleDropdownOpenClick = e => {
     console.log(e.target.value);
@@ -34,9 +40,18 @@ const ReviewerList = ({ reviewerData, setModalOpen, modalOpen }) => {
   };
 
   const handleCheckBoxClick = e => {
-    console.log();
-    console.log(e.target.value);
+    const isExistedId = checkedIdArr.includes(e.target.value);
+    if (isExistedId) {
+      const filteredArr = checkedIdArr.filter(
+        checkedId => checkedId !== e.target.value,
+      );
+      setCheckedIdArr(filteredArr);
+    }
+    checkedIdArr.push(e.target.value);
+    setCheckedId(e.target.value);
   };
+
+  console.log('체크 리뷰어 목록', checkedIdArr);
 
   const handleBrandRequestHistoryClick = (id, name, nickname) => {
     setModalOpen(prev => !prev);
@@ -60,12 +75,13 @@ const ReviewerList = ({ reviewerData, setModalOpen, modalOpen }) => {
           <ul className="table-body-container">
             {reviewerData.map((data, idx) => {
               return (
-                <li key={idx} className="table-body-row">
+                <li key={idx} className={`table-body-row`}>
                   <div>
                     <input
+                      className="table-body-row_checkbox"
                       type="checkbox"
                       value={data.id}
-                      onClick={handleCheckBoxClick}
+                      onClick={e => handleCheckBoxClick(e)}
                     />
                   </div>
                   <div>
@@ -163,6 +179,15 @@ const ReviewerList = ({ reviewerData, setModalOpen, modalOpen }) => {
           <p>리뷰어가 없습니다.</p>
         )}
       </div>
+      <button
+        className={
+          checkedIdArr.length > 0 && checkedIdArr.length <= maxRecruits
+            ? 'button-active'
+            : 'button-inactive'
+        }
+      >
+        {checkedIdArr.length ? `${checkedIdArr.length}명` : ''} 선정하기
+      </button>
       {modalOpen && (
         <BrandRequestHistoryModal
           setModalOpen={setModalOpen}

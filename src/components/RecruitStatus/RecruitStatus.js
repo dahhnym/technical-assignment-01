@@ -7,7 +7,7 @@ import { getProjectInfo, getReviewerData } from '../../utils';
 const RecruitStatus = () => {
   const selectedReviewer = 0;
 
-  const [projectId, setProjectId] = useState(0);
+  const [projectInfo, setProjectInfo] = useState(0);
   const [reviewerData, setData] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,7 +21,7 @@ const RecruitStatus = () => {
     const fetchProjectInfo = async () => {
       const info = await getProjectInfo();
       if (info) {
-        setProjectId(info);
+        setProjectInfo(info);
       }
     };
     const fetchReviewerList = async () => {
@@ -39,7 +39,7 @@ const RecruitStatus = () => {
     <div className="App">
       <header className="header">
         <img className="logo" src={Logo} alt="리뷰쉐어" />
-        <h1>모집현황 | 프로젝트 번호: {projectId ? projectId.id : ''}</h1>
+        <h1>모집현황 | 프로젝트 번호: {projectInfo ? projectInfo.id : ''}</h1>
       </header>
       <section className="reviewer-board-wrapper">
         <ul className="tab-container">
@@ -65,8 +65,8 @@ const RecruitStatus = () => {
                 reviewerData={reviewerData}
                 setModalOpen={setModalOpen}
                 modalOpen={modalOpen}
+                maxRecruits={projectInfo.recruits}
               />
-              <button className="button-inactive">선정하기</button>
             </>
           )}
           {tabIndex === 1 && (
