@@ -66,7 +66,7 @@ const RecruitStatus = () => {
                 setModalOpen={setModalOpen}
                 modalOpen={modalOpen}
               />
-              <button className="submit-button">선정하기</button>
+              <button className="button-inactive">선정하기</button>
             </>
           )}
           {tabIndex === 1 && (

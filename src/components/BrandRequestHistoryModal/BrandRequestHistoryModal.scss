@@ -15,8 +15,6 @@
 }
 
 .modal-container {
-  width: 5rem;
-  height: 5rem;
   background-color: #fff;
   width: 31rem;
   height: 42.5rem;
@@ -31,21 +29,64 @@
 .modal-title {
   font-size: 1.5rem;
   font-weight: 500;
+  margin-top: 4px;
   margin-bottom: 2rem;
 }
 
-.modal-table {
+.modal_table-header-container {
+  display: grid;
   grid-template-columns: 2fr 1fr;
+  width: 100%;
+  height: 2rem;
+  background-color: #f7f7fa;
+  border-top: solid 1px $border-grey;
+  border-bottom: solid 1px $border-grey;
+  li:first-child {
+    border-right: solid 1px $border-grey;
+  }
 }
 
-.modal-table_body-row {
-  grid-template-columns: 2fr 0.88fr;
+.modal_table-header-cell {
+  font-size: 0.75rem;
+  color: $table-header-text-color;
+  line-height: 2rem;
+  text-align: center;
+}
+
+.modal_table-body-container {
+  width: 100%;
+  height: 24rem;
+  background-color: #fff;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.modal_table-body-row {
+  font-size: 0.875rem;
+  color: $table-header-text-color;
+  border-bottom: solid 1px $border-grey;
   height: 3.75rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  color: $table-body-text-color;
+  word-break: keep-all;
+  div:first-child {
+    border-right: solid 1px $border-grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+  }
 }
 
-.modal-table_body-col-1 {
+.modal_table-body-col-1 {
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+}
+
+.modal_table-body-col-2 {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -61,4 +102,30 @@
 
 .modal-table_header {
   font-size: 0.75rem;
+}
+
+@mixin modal-button-size {
+  width: 4.375rem;
+  height: 2rem;
+  font-size: 0.75rem;
+}
+
+.modal-button-inactive {
+  @include button-inactive;
+  @include modal-button-size;
+}
+
+.modal-button-active-white {
+  @include button-active-white;
+  @include modal-button-size;
+  a {
+    color: $text-color-black;
+  }
+}
+
+.modal-button-active-blue {
+  @include button-active-blue;
+  width: 5.75rem;
+  height: 2.375rem;
+  font-size: 0.875rem;
 }

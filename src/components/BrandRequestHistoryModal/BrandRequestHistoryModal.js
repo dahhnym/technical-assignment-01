@@ -22,34 +22,34 @@ const BrandRequestHistoryModal = ({ setModalOpen, reviewerInfo }) => {
   return (
     <div className="overlay">
       <div className="modal-container">
-        <button
-          className="close-button"
-          onClick={() => setModalOpen(prev => !prev)}
-        >
-          <img src={Close} alt="모달 닫기" />
-        </button>
-        <h2 className="modal-title">
-          {name}({nickname})님
-          <br />내 브랜드 참여 횟수
-        </h2>
+        <div>
+          <button
+            className="close-button"
+            onClick={() => setModalOpen(prev => !prev)}
+          >
+            <img src={Close} alt="모달 닫기" />
+          </button>
+          <h2 className="modal-title">
+            {name}({nickname})님
+            <br />내 브랜드 참여 횟수
+          </h2>
+        </div>
         <p className="number-of-request">
           {brandRequestHistoryData?.length &&
             `총 ${brandRequestHistoryData.length}회`}
         </p>
         <div>
-          <ul className="table-header-container modal-table">
-            <li className="table-header-cell modal-table_header">프로젝트</li>
-            <li className="table-header-cell modal-table_header">
-              제출 결과물
-            </li>
+          <ul className="modal_table-header-container">
+            <li className="modal_table-header-cell">프로젝트</li>
+            <li className="modal_table-header-cell">제출 결과물</li>
           </ul>
-          <ul className="table-body-container">
+          <ul className="modal_table-body-container">
             {brandRequestHistoryData &&
               brandRequestHistoryData.map((data, idx) => {
                 const { reviewUrl, sns, title } = data;
                 return (
-                  <li key={idx} className="table-body-row modal-table_body-row">
-                    <p className="modal-table_body-col-1">
+                  <li key={idx} className="modal_table-body-row">
+                    <div className="modal_table-body-col-1">
                       {sns === 'NaverBlog' && (
                         <img
                           src={NaverBlog}
@@ -65,23 +65,26 @@ const BrandRequestHistoryModal = ({ setModalOpen, reviewerInfo }) => {
                         />
                       )}
                       {title}
-                    </p>
-                    <div>
-                      {reviewUrl ? (
-                        <button>
-                          <a href={reviewUrl} target="_blank" rel="noreferrer">
-                            보기
-                          </a>
-                        </button>
-                      ) : (
-                        <button disabled>미제출</button>
-                      )}
+                    </div>
+                    <div className="modal_table-body-col-2">
+                      <button
+                        className={
+                          reviewUrl !== null
+                            ? 'modal-button-active-white'
+                            : 'modal-button-inactive'
+                        }
+                      >
+                        <a href={reviewUrl} target="_blank" rel="noreferrer">
+                          {reviewUrl !== null ? '보기' : '미제출'}
+                        </a>
+                      </button>
                     </div>
                   </li>
                 );
               })}
           </ul>
         </div>
+        <button className="modal-button-active-blue">선정하기</button>
       </div>
     </div>
   );

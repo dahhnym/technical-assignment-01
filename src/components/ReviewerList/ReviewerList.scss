@@ -37,7 +37,7 @@ $message-box-height: 1.93rem;
   height: 30rem;
   background-color: #fff;
   border-bottom: solid 1px $border-grey;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .table-body-row {
@@ -110,7 +110,7 @@ $message-box-height: 1.93rem;
 }
 
 .table-body-row_message-invalid {
-  color: $inactive-text-color;
+  color: $text-color-inactive;
   margin-left: 11px;
 }
 
