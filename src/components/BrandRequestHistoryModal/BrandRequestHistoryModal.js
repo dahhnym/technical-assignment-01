@@ -5,9 +5,13 @@ import { getBrandRequestHistory } from '../../utils';
 import NaverBlog from './../../assets/naver-blog-icon.svg';
 import Instagram from './../../assets/instagram-icon.svg';
 
-const BrandRequestHistoryModal = ({ setModalOpen, reviewerInfo }) => {
+const BrandRequestHistoryModal = ({
+  setModalOpen,
+  applicantInfo,
+  handleModalButtonClick,
+}) => {
   const [brandRequestHistoryData, setbrandRequestHistoryData] = useState();
-  const { id, name, nickname } = reviewerInfo;
+  const { id, name, nickname, isChosen } = applicantInfo;
 
   useEffect(() => {
     const fetchBrandRequestHistory = async () => {
@@ -70,8 +74,8 @@ const BrandRequestHistoryModal = ({ setModalOpen, reviewerInfo }) => {
                       <button
                         className={
                           reviewUrl !== null
-                            ? 'modal-button-active-white'
-                            : 'modal-button-inactive'
+                            ? 'modal-view-button active-white'
+                            : 'modal-view-button inactive'
                         }
                       >
                         <a href={reviewUrl} target="_blank" rel="noreferrer">
@@ -84,7 +88,14 @@ const BrandRequestHistoryModal = ({ setModalOpen, reviewerInfo }) => {
               })}
           </ul>
         </div>
-        <button className="modal-button-active-blue">선정하기</button>
+        <button
+          className={`modal-submit-button ${
+            isChosen ? 'active-white' : 'active-blue'
+          }`}
+          onClick={() => handleModalButtonClick(id, isChosen)}
+        >
+          {isChosen ? '선정 취소' : '선정하기'}
+        </button>
       </div>
     </div>
   );

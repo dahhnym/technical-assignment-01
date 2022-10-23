@@ -162,6 +162,7 @@ $message-box-height: 1.93rem;
 }
 
 @mixin button-active-white {
+  display: block;
   margin: 0 auto;
   background-color: #fff;
   border: solid 1px $border-grey;
@@ -181,14 +182,19 @@ $message-box-height: 1.93rem;
   color: #fff;
 }
 
-.button-inactive {
+.submit-button {
   height: 50px;
   padding: 0 22px;
+}
+
+.inactive {
   @include button-inactive;
 }
 
-.button-active {
-  height: 50px;
-  padding: 0 22px;
+.active-blue {
   @include button-active-blue;
+}
+
+.active-white {
+  @include button-active-white;
 }

@@ -104,28 +104,14 @@
   font-size: 0.75rem;
 }
 
-@mixin modal-button-size {
-  width: 4.375rem;
-  height: 2rem;
-  font-size: 0.75rem;
-}
-
-.modal-button-inactive {
-  @include button-inactive;
-  @include modal-button-size;
-}
-
-.modal-button-active-white {
-  @include button-active-white;
-  @include modal-button-size;
-  a {
-    color: $text-color-black;
-  }
-}
-
-.modal-button-active-blue {
-  @include button-active-blue;
+.modal-submit-button {
   width: 5.75rem;
   height: 2.375rem;
   font-size: 0.875rem;
+}
+
+.modal-view-button {
+  width: 4.375rem;
+  height: 2rem;
+  font-size: 0.75rem;
 }

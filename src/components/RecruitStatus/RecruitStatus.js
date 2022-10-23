@@ -2,13 +2,16 @@ import Logo from './../../assets/logo.svg';
 import './RecruitStatus.scss';
 import ReviewerList from '../ReviewerList/ReviewerList';
 import { useEffect, useState } from 'react';
-import { getProjectInfo, getReviewerData } from '../../utils';
+import {
+  getProjectInfo,
+  getApplicantData,
+  getChosenReviewerData,
+} from '../../utils';
 
 const RecruitStatus = () => {
-  const selectedReviewer = 0;
-
   const [projectInfo, setProjectInfo] = useState(0);
-  const [reviewerData, setData] = useState('');
+  const [applicantData, setApplicantData] = useState('');
+  const [chosenReviewerData, setChosenReviewerData] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -24,16 +27,25 @@ const RecruitStatus = () => {
         setProjectInfo(info);
       }
     };
-    const fetchReviewerList = async () => {
-      const data = await getReviewerData();
+    const fetchApplicantList = async () => {
+      const data = await getApplicantData();
       if (data) {
-        setData(data);
+        setApplicantData(data);
+      }
+    };
+    const fetchChosenReviewerList = async () => {
+      const data = await getChosenReviewerData();
+      if (data) {
+        setChosenReviewerData(data);
       }
     };
 
-    fetchReviewerList();
+    fetchApplicantList();
     fetchProjectInfo();
+    fetchChosenReviewerList();
   }, []);
+
+  const loadingMessage = '데이터를 불러오는 중입니다...';
 
   return (
     <div className="App">
@@ -48,30 +60,49 @@ const RecruitStatus = () => {
             value="0"
             onClick={e => handleTabClick(e)}
           >
-            신청 리뷰어 &#40;{reviewerData.length}&#41;
+            신청 리뷰어 &#40;{applicantData.length}&#41;
           </li>
           <li
             className={`tab ${tabIndex === 1 ? 'tab_active' : ''}`}
             value="1"
             onClick={e => handleTabClick(e)}
           >
-            선정 리뷰어&#40;{selectedReviewer}&#41;
+            선정 리뷰어({chosenReviewerData.length})
           </li>
         </ul>
         <div className="reviewer-list-container">
-          {tabIndex === 0 && (
-            <>
-              <ReviewerList
-                reviewerData={reviewerData}
-                setModalOpen={setModalOpen}
-                modalOpen={modalOpen}
-                maxRecruits={projectInfo.recruits}
-              />
-            </>
-          )}
-          {tabIndex === 1 && (
-            <p className="reviewer-list_no-reviewer">선정 리뷰어가 없습니다.</p>
-          )}
+          {tabIndex === 0 &&
+            (applicantData ? (
+              <>
+                <ReviewerList
+                  applicantData={applicantData}
+                  setModalOpen={setModalOpen}
+                  modalOpen={modalOpen}
+                  maxRecruits={projectInfo.recruits}
+                />
+              </>
+            ) : (
+              loadingMessage
+            ))}
+          {tabIndex === 1 &&
+            (chosenReviewerData ? (
+              <>
+                {chosenReviewerData ? (
+                  <ReviewerList
+                    chosenReviewerData={chosenReviewerData}
+                    setModalOpen={setModalOpen}
+                    modalOpen={modalOpen}
+                    maxRecruits={projectInfo.recruits}
+                  />
+                ) : (
+                  <p className="reviewer-list_no-reviewer">
+                    선정 리뷰어가 없습니다.
+                  </p>
+                )}
+              </>
+            ) : (
+              loadingMessage
+            ))}
         </div>
       </section>
     </div>

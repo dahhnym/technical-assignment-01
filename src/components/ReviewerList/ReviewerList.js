@@ -3,12 +3,14 @@ import './ReviewerList.scss';
 import Star from './../../assets/star.svg';
 import ArrowRight from './../../assets/arrow-right.svg';
 import BrandRequestHistoryModal from '../BrandRequestHistoryModal/BrandRequestHistoryModal';
+import { updateIsChosenStatus } from '../../utils';
 
 const ReviewerList = ({
-  reviewerData,
+  applicantData,
   setModalOpen,
   modalOpen,
   maxRecruits,
+  chosenReviewerData,
 }) => {
   const tableHeaderItems = [
     '별표',
@@ -27,12 +29,30 @@ const ReviewerList = ({
     '내 브랜드 참여',
   ];
 
-  const [reviewerInfo, setReviewerInfo] = useState({});
+  const [reviewerData, setReviewerData] = useState();
+  const [applicantInfo, setApplicantInfo] = useState({});
   const [selectedId, setSelectedId] = useState(0);
   const [checkedId, setCheckedId] = useState(0);
   const [checkedIdArr, setCheckedIdArr] = useState([]);
+  const [isChosen, setIsChosen] = useState(false);
 
-  useEffect(() => {}, [checkedIdArr, checkedId]);
+  useEffect(() => {}, [
+    checkedIdArr,
+    checkedId,
+    applicantData,
+    chosenReviewerData,
+  ]);
+
+  useEffect(() => {
+    if (applicantData) {
+      setReviewerData(applicantData);
+      setIsChosen(false);
+    }
+    if (chosenReviewerData) {
+      setReviewerData(chosenReviewerData);
+      setIsChosen(true);
+    }
+  }, []);
 
   const handleDropdownOpenClick = e => {
     console.log(e.target.value);
@@ -51,11 +71,13 @@ const ReviewerList = ({
     setCheckedId(e.target.value);
   };
 
-  console.log('체크 리뷰어 목록', checkedIdArr);
-
-  const handleBrandRequestHistoryClick = (id, name, nickname) => {
+  const handleBrandRequestHistoryClick = (id, name, nickname, isChosen) => {
     setModalOpen(prev => !prev);
-    setReviewerInfo({ id, name, nickname });
+    setApplicantInfo({ id, name, nickname, isChosen });
+  };
+
+  const handleButtonClick = (id, isChosenStatus) => {
+    updateIsChosenStatus(id, isChosenStatus);
   };
 
   return (
@@ -159,6 +181,7 @@ const ReviewerList = ({
                             data.id,
                             data.name,
                             data.nickName,
+                            data.isChosen,
                           )
                         }
                       >
@@ -180,18 +203,23 @@ const ReviewerList = ({
         )}
       </div>
       <button
+        onClick={() => {
+          handleButtonClick(checkedId, isChosen);
+        }}
         className={
           checkedIdArr.length > 0 && checkedIdArr.length <= maxRecruits
-            ? 'button-active'
-            : 'button-inactive'
+            ? `submit-button ${isChosen ? 'active-white' : 'active-blue'}`
+            : 'submit-button inactive'
         }
       >
-        {checkedIdArr.length ? `${checkedIdArr.length}명` : ''} 선정하기
+        {checkedIdArr.length && !isChosen ? `${checkedIdArr.length}명 ` : ''}
+        {isChosen ? '선정 취소' : '선정하기'}
       </button>
       {modalOpen && (
         <BrandRequestHistoryModal
           setModalOpen={setModalOpen}
-          reviewerInfo={reviewerInfo}
+          applicantInfo={applicantInfo}
+          handleModalButtonClick={handleButtonClick}
         />
       )}
     </>

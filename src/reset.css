@@ -11,7 +11,10 @@ body,
 ul,
 li,
 div,
-p, button, h1, h2 {
+p,
+button,
+h1,
+h2 {
   margin: 0;
   padding: 0;
 }
@@ -24,6 +27,7 @@ li {
 button {
   border: none;
   background-color: transparent;
+  font-family: inherit;
 }
 
 button:hover {
@@ -38,7 +42,8 @@ div {
   box-sizing: border-box;
 }
 
-h1, h2 {
-    font-size: initial;
-    font-weight: initial;
+h1,
+h2 {
+  font-size: initial;
+  font-weight: initial;
 }

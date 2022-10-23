@@ -10,8 +10,8 @@ export const getProjectInfo = () => {
   return data;
 };
 
-export const getReviewerData = () => {
-  const data = fetch(`${BASE_URL}/projectRequests`).then(res => {
+export const getApplicantData = () => {
+  const data = fetch(`${BASE_URL}/projectRequests?isChosen=false`).then(res => {
     if (!res.ok) {
       throw new Error(`예기치 않은 오류가 발생했습니다. ${res.status}`);
     }
@@ -30,4 +30,30 @@ export const getBrandRequestHistory = userId => {
     },
   );
   return data;
+};
+
+export const getChosenReviewerData = () => {
+  const data = fetch(`${BASE_URL}/projectRequests?isChosen=true`).then(res => {
+    if (!res.ok) {
+      throw new Error(`예기치 않은 오류가 발생했습니다. ${res.status}`);
+    }
+    return res.json();
+  });
+  return data;
+};
+
+export const updateIsChosenStatus = (id, isChosenStatus) => {
+  fetch(`${BASE_URL}/projectRequests/${id}`, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify({ isChosen: !isChosenStatus }),
+  })
+    .then(res => {
+      console.log('PATCH result', res.status);
+      return res.status;
+    })
+    .catch(error => console.error(error));
 };
