@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './ReviewerList.scss';
 import Star from './../../assets/star.svg';
 import ArrowRight from './../../assets/arrow-right.svg';
+import ArrowDown from './../../assets/arrow-down.svg';
+import ArrowUp from './../../assets/arrow-up.svg';
 import BrandRequestHistoryModal from '../BrandRequestHistoryModal/BrandRequestHistoryModal';
 
 const ReviewerList = ({ reviewerData, setModalOpen, modalOpen }) => {
@@ -23,12 +25,20 @@ const ReviewerList = ({ reviewerData, setModalOpen, modalOpen }) => {
   ];
 
   const [reviewerInfo, setReviewerInfo] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState(6);
 
-  const onCheckBoxClick = e => {
+  const handleDropdownOpenClick = e => {
+    console.log(e.target.value);
+    setSelectedId(e.target.value);
+  };
+
+  const handleCheckBoxClick = e => {
+    console.log();
     console.log(e.target.value);
   };
 
-  const onBrandRequestHistoryClick = (id, name, nickname) => {
+  const handleBrandRequestHistoryClick = (id, name, nickname) => {
     setModalOpen(prev => !prev);
     setReviewerInfo({ id, name, nickname });
   };
@@ -55,7 +65,7 @@ const ReviewerList = ({ reviewerData, setModalOpen, modalOpen }) => {
                     <input
                       type="checkbox"
                       value={data.id}
-                      onClick={onCheckBoxClick}
+                      onClick={handleCheckBoxClick}
                     />
                   </div>
                   <div>
@@ -91,9 +101,18 @@ const ReviewerList = ({ reviewerData, setModalOpen, modalOpen }) => {
                           내용이 없습니다.
                         </span>
                       )}
-                      <div className="table-body-row_message-box-dropdown">
-                        {data.message}
-                      </div>
+                      {data.message.length > 34 && (
+                        <button
+                          className="button-dropdown open"
+                          value={data.id}
+                          onClick={e => handleDropdownOpenClick(e)}
+                        ></button>
+                      )}
+                      {selectedId === data.id ? (
+                        <div className="table-body-row_message-box-dropdown">
+                          {data.message}
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                   <div>{data.recommend}회</div>
@@ -120,7 +139,7 @@ const ReviewerList = ({ reviewerData, setModalOpen, modalOpen }) => {
                             : ''
                         }
                         onClick={() =>
-                          onBrandRequestHistoryClick(
+                          handleBrandRequestHistoryClick(
                             data.id,
                             data.name,
                             data.nickName,

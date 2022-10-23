@@ -84,19 +84,23 @@ $message-box-height: 1.93rem;
   padding-right: 11px;
   text-align: left;
   background-color: #fff;
-  cursor: default;
-  &::before {
-    display: block;
-    content: '';
-    width: 1rem;
-    height: 1rem;
-    background: no-repeat center url('./../../assets/arrow-down.svg');
-    float: right;
-    margin-top: 6.5px;
-  }
-  &:hover::before {
-    cursor: pointer;
-  }
+}
+
+.button-dropdown {
+  border: solid 1px red;
+  position: absolute;
+  top: 0;
+  right: 13px;
+  width: 0.8rem;
+  height: 0.5rem;
+}
+
+.open {
+  background: no-repeat url('./../../assets/arrow-down.svg');
+}
+
+.close {
+  background: url('./../../assets/arrow-up.svg');
 }
 
 .table-body-row_message-valid {
@@ -105,17 +109,19 @@ $message-box-height: 1.93rem;
   text-overflow: ellipsis;
   width: 90%;
   margin-left: 11px;
+  font-size: 0.75rem;
   font-weight: 500;
   line-height: $message-box-height;
 }
 
 .table-body-row_message-invalid {
+  font-size: 0.75rem;
   color: $text-color-inactive;
   margin-left: 11px;
 }
 
 .table-body-row_message-box-dropdown {
-  display: none;
+  //   display: none;
   position: absolute;
   top: 120%;
   width: 100%;
