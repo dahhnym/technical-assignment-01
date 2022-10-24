@@ -12,6 +12,8 @@ const ReviewerList = ({
   modalOpen,
   maxRecruits,
   chosenReviewerData,
+  fetchApplicantList,
+  fetchChosenReviewerList,
 }) => {
   const tableHeaderItems = [
     '별표',
@@ -54,7 +56,7 @@ const ReviewerList = ({
       setReviewerData(chosenReviewerData);
       setIsChosen(true);
     }
-  }, []);
+  }, [applicantData, chosenReviewerData]);
 
   const handleDropdownOpenClick = e => {
     console.log(e.target.value);
@@ -81,6 +83,12 @@ const ReviewerList = ({
   const handleButtonClick = (id, isChosenStatus) => {
     updateIsChosenStatus(id, isChosenStatus);
     setIsConfirmModalOpen(prev => !prev);
+  };
+
+  const resetCheckedStatus = () => {
+    setCheckedIdArr([]);
+    setCheckedId(0);
+    document.querySelector('.table-body-row_checkbox').checked = false;
   };
 
   return (
@@ -234,6 +242,9 @@ const ReviewerList = ({
           checkedIdCount={checkedIdArr.length}
           setIsConfirmModalOpen={setIsConfirmModalOpen}
           isChosen={isChosen}
+          fetchApplicantList={fetchApplicantList}
+          fetchChosenReviewerList={fetchChosenReviewerList}
+          resetCheckedStatus={resetCheckedStatus}
         />
       )}
     </>

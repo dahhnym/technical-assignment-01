@@ -52,8 +52,7 @@ export const updateIsChosenStatus = (id, isChosenStatus) => {
     body: JSON.stringify({ isChosen: !isChosenStatus }),
   })
     .then(res => {
-      console.log('PATCH result', res.status);
-      return res.status;
+      console.log('PATCH response', res.status);
     })
     .catch(error => console.error(error));
 };

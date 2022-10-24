@@ -20,26 +20,28 @@ const RecruitStatus = () => {
     setTabIndex(clickedTabIndex);
   };
 
-  useEffect(() => {
-    const fetchProjectInfo = async () => {
-      const info = await getProjectInfo();
-      if (info) {
-        setProjectInfo(info);
-      }
-    };
-    const fetchApplicantList = async () => {
-      const data = await getApplicantData();
-      if (data) {
-        setApplicantData(data);
-      }
-    };
-    const fetchChosenReviewerList = async () => {
-      const data = await getChosenReviewerData();
-      if (data) {
-        setChosenReviewerData(data);
-      }
-    };
+  const fetchProjectInfo = async () => {
+    const info = await getProjectInfo();
+    if (info) {
+      setProjectInfo(info);
+    }
+  };
 
+  const fetchApplicantList = async () => {
+    const data = await getApplicantData();
+    if (data) {
+      setApplicantData(data);
+    }
+  };
+
+  const fetchChosenReviewerList = async () => {
+    const data = await getChosenReviewerData();
+    if (data) {
+      setChosenReviewerData(data);
+    }
+  };
+
+  useEffect(() => {
     fetchApplicantList();
     fetchProjectInfo();
     fetchChosenReviewerList();
@@ -78,6 +80,8 @@ const RecruitStatus = () => {
                 setModalOpen={setModalOpen}
                 modalOpen={modalOpen}
                 maxRecruits={projectInfo.recruits}
+                fetchApplicantList={fetchApplicantList}
+                fetchChosenReviewerList={fetchChosenReviewerList}
               />
             ) : (
               loadingMessage
@@ -89,6 +93,8 @@ const RecruitStatus = () => {
                 setModalOpen={setModalOpen}
                 modalOpen={modalOpen}
                 maxRecruits={projectInfo.recruits}
+                fetchApplicantList={fetchApplicantList}
+                fetchChosenReviewerList={fetchChosenReviewerList}
               />
             ) : (
               loadingMessage

@@ -92,7 +92,10 @@ const BrandRequestHistoryModal = ({
           className={`modal-submit-button ${
             isChosen ? 'active-white' : 'active-blue'
           }`}
-          onClick={() => handleModalButtonClick(id, isChosen)}
+          onClick={() => {
+            handleModalButtonClick(id, isChosen);
+            setModalOpen(prev => !prev);
+          }}
         >
           {isChosen ? '선정 취소' : '선정하기'}
         </button>

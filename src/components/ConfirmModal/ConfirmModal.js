@@ -1,14 +1,21 @@
-import { getApplicantData, getChosenReviewerData } from '../../utils';
 import './ConfirmModal.scss';
 
-const ConfirmModal = ({ checkedIdCount, setIsConfirmModalOpen, isChosen }) => {
+const ConfirmModal = ({
+  checkedIdCount,
+  setIsConfirmModalOpen,
+  isChosen,
+  fetchApplicantList,
+  fetchChosenReviewerList,
+  resetCheckedStatus,
+}) => {
   const executedAction = isChosen ? '취소' : '선정';
   const reviewerListName = isChosen ? '신청' : '선정';
 
   const handleButtonClick = () => {
     setIsConfirmModalOpen(prev => !prev);
-    getChosenReviewerData();
-    getApplicantData();
+    fetchChosenReviewerList();
+    fetchApplicantList();
+    resetCheckedStatus();
   };
 
   return (
