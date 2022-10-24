@@ -24,6 +24,7 @@ const ReviewerList = ({
   const [checkedIdArr, setCheckedIdArr] = useState([]);
   const [isChosen, setIsChosen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {}, [
     checkedIdArr,
@@ -43,9 +44,12 @@ const ReviewerList = ({
     }
   }, [applicantData, chosenReviewerData]);
 
+  const toggleDropdown = () => setIsDropdownOpen(prev => !prev);
+
   const handleDropdownOpenClick = e => {
-    console.log(e.target.value);
-    setSelectedId(e.target.value);
+    const targetValueNum = Number(e.target.value);
+    setSelectedId(targetValueNum);
+    toggleDropdown();
   };
 
   const handleCheckBoxClick = e => {
@@ -66,6 +70,7 @@ const ReviewerList = ({
   };
 
   const handleButtonClick = (id, isChosenStatus) => {
+    if (checkedIdArr.length > maxRecruits) return;
     updateIsChosenStatus(id, isChosenStatus);
     setIsConfirmModalOpen(prev => !prev);
   };
@@ -73,7 +78,6 @@ const ReviewerList = ({
   const resetCheckedStatus = () => {
     setCheckedIdArr([]);
     setCheckedId(0);
-    document.querySelector('.table-body-row_checkbox').checked = false;
   };
 
   return (
@@ -101,7 +105,7 @@ const ReviewerList = ({
                         className="table-body-row_checkbox"
                         type="checkbox"
                         value={data.id}
-                        onClick={e => handleCheckBoxClick(e)}
+                        onChange={e => handleCheckBoxClick(e)}
                       />
                     </div>
                     <div>
@@ -138,14 +142,24 @@ const ReviewerList = ({
                           </span>
                         )}
                         {data.message.length > 34 && (
-                          <button
-                            className="button-dropdown open"
-                            value={data.id}
-                            onClick={e => handleDropdownOpenClick(e)}
-                          ></button>
+                          <>
+                            <button
+                              className={`button-dropdown ${
+                                selectedId === data.id && isDropdownOpen
+                                  ? 'close'
+                                  : 'open'
+                              }`}
+                              value={data.id}
+                              onClick={e => handleDropdownOpenClick(e)}
+                            ></button>
+                          </>
                         )}
-                        {selectedId === data.id ? (
-                          <div className="table-body-row_message-box-dropdown">
+                        {selectedId === data.id && isDropdownOpen ? (
+                          <div
+                            className={`table-body-row_message-box-dropdown ${
+                              isDropdownOpen ? 'visible' : ''
+                            }`}
+                          >
                             {data.message}
                           </div>
                         ) : null}

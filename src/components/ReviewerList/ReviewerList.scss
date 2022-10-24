@@ -101,7 +101,7 @@ $message-box-height: 1.93rem;
 }
 
 .close {
-  background: url('./../../assets/arrow-up.svg');
+  background: no-repeat url('./../../assets/arrow-up.svg');
 }
 
 .table-body-row_message-valid {
@@ -122,7 +122,7 @@ $message-box-height: 1.93rem;
 }
 
 .table-body-row_message-box-dropdown {
-  //   display: none;
+  display: none;
   position: absolute;
   top: 120%;
   width: 100%;
