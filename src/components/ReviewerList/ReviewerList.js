@@ -48,21 +48,22 @@ const ReviewerList = ({
   const toggleDropdown = () => setIsDropdownOpen(prev => !prev);
 
   const handleDropdownOpenClick = e => {
-    const targetValueNum = Number(e.target.value);
-    setSelectedId(targetValueNum);
+    const clickedElemValue = Number(e.target.value);
+    setSelectedId(clickedElemValue);
     toggleDropdown();
   };
 
   const handleCheckBoxClick = e => {
-    const isExistedId = checkedIdArr.includes(e.target.value);
+    const clickedElemValue = Number(e.target.value);
+    const isExistedId = checkedIdArr.includes(clickedElemValue);
     if (isExistedId) {
       const filteredArr = checkedIdArr.filter(
-        checkedId => checkedId !== e.target.value,
+        checkedId => checkedId !== clickedElemValue,
       );
       setCheckedIdArr(filteredArr);
     }
-    checkedIdArr.push(e.target.value);
-    setCheckedId(e.target.value);
+    checkedIdArr.push(clickedElemValue);
+    setCheckedId(clickedElemValue);
   };
 
   const handleBrandRequestHistoryClick = (id, name, nickname, isChosen) => {
@@ -111,8 +112,14 @@ const ReviewerList = ({
           <ul className="table-body-container">
             {reviewerData.length !== 0 ? (
               reviewerData.map((data, idx) => {
+                const isChecked = checkedIdArr.includes(data.id);
                 return (
-                  <li key={idx} className={`table-body-row`}>
+                  <li
+                    key={idx}
+                    className={`table-body-row ${
+                      isChecked ? 'table-body-row_checked' : ''
+                    }`}
+                  >
                     <div>
                       <input
                         className="table-body-row_checkbox"
