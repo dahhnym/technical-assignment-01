@@ -52,7 +52,22 @@ export const updateIsChosenStatus = (id, isChosenStatus) => {
     body: JSON.stringify({ isChosen: !isChosenStatus }),
   })
     .then(res => {
-      console.log('PATCH response', res.status);
+      console.log('update isChosen res status', res.status);
+    })
+    .catch(error => console.error(error));
+};
+
+export const updateBookmarkStatus = (id, isBookmarkStatus) => {
+  fetch(`${BASE_URL}/projectRequests/${id}`, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify({ isBookmark: !isBookmarkStatus }),
+  })
+    .then(res => {
+      console.log('update bookmark res status', res.status);
     })
     .catch(error => console.error(error));
 };

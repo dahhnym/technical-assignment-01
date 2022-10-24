@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import './ReviewerList.scss';
-import Star from './../../assets/star.svg';
+import NotStarred from './../../assets/not-starred.svg';
+import Starred from './../../assets/starred.svg';
 import ArrowRight from './../../assets/arrow-right.svg';
 import BrandRequestHistoryModal from '../BrandRequestHistoryModal/BrandRequestHistoryModal';
-import { updateIsChosenStatus } from '../../utils';
+import { updateBookmarkStatus, updateIsChosenStatus } from '../../utils';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import ArrowUpDown from './../../assets/arrow-updown.svg';
 import { tableHeaderItems } from '../../constant';
@@ -69,7 +70,7 @@ const ReviewerList = ({
     setApplicantInfo({ id, name, nickname, isChosen });
   };
 
-  const handleButtonClick = (id, isChosenStatus) => {
+  const handleSubmitButtonClick = (id, isChosenStatus) => {
     if (checkedIdArr.length > maxRecruits) return;
     updateIsChosenStatus(id, isChosenStatus);
     setIsConfirmModalOpen(prev => !prev);
@@ -78,6 +79,12 @@ const ReviewerList = ({
   const resetCheckedStatus = () => {
     setCheckedIdArr([]);
     setCheckedId(0);
+  };
+
+  const handleBookmarkClick = (id, isBookmarkStatus) => {
+    updateBookmarkStatus(id, isBookmarkStatus);
+    fetchApplicantList();
+    fetchChosenReviewerList();
   };
 
   return (
@@ -90,7 +97,13 @@ const ReviewerList = ({
           {tableHeaderItems.map((item, idx) => (
             <li className="table-header-cell" key={idx}>
               {item}
-              {idx === 1 && <img src={ArrowUpDown} alt="정렬" />}
+              {idx === 1 && (
+                <img
+                  src={ArrowUpDown}
+                  alt="정렬"
+                  style={{ marginLeft: '5px' }}
+                />
+              )}
             </li>
           ))}
         </ul>
@@ -109,13 +122,18 @@ const ReviewerList = ({
                       />
                     </div>
                     <div>
-                      {data.isBookmark ? (
-                        '★'
-                      ) : (
-                        <a href="#">
-                          <img src={Star} alt="즐겨찾기" />
-                        </a>
-                      )}
+                      <button
+                        href="#"
+                        onClick={() =>
+                          handleBookmarkClick(data.id, data.isBookmark)
+                        }
+                      >
+                        {data.isBookmark ? (
+                          <img src={Starred} alt="북마크 설정됨" />
+                        ) : (
+                          <img src={NotStarred} alt="북마크 설정 안 됨" />
+                        )}
+                      </button>
                     </div>
                     <div>{data.id}</div>
                     <div>
@@ -219,7 +237,7 @@ const ReviewerList = ({
       </div>
       <button
         onClick={() => {
-          handleButtonClick(checkedId, isChosen);
+          handleSubmitButtonClick(checkedId, isChosen);
         }}
         className={
           checkedIdArr.length > 0 && checkedIdArr.length <= maxRecruits
@@ -234,7 +252,7 @@ const ReviewerList = ({
         <BrandRequestHistoryModal
           setModalOpen={setModalOpen}
           applicantInfo={applicantInfo}
-          handleModalButtonClick={handleButtonClick}
+          handleModalButtonClick={handleSubmitButtonClick}
         />
       )}
       {isConfirmModalOpen && (
