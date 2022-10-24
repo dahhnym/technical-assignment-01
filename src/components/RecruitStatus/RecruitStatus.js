@@ -73,33 +73,23 @@ const RecruitStatus = () => {
         <div className="reviewer-list-container">
           {tabIndex === 0 &&
             (applicantData ? (
-              <>
-                <ReviewerList
-                  applicantData={applicantData}
-                  setModalOpen={setModalOpen}
-                  modalOpen={modalOpen}
-                  maxRecruits={projectInfo.recruits}
-                />
-              </>
+              <ReviewerList
+                applicantData={applicantData}
+                setModalOpen={setModalOpen}
+                modalOpen={modalOpen}
+                maxRecruits={projectInfo.recruits}
+              />
             ) : (
               loadingMessage
             ))}
           {tabIndex === 1 &&
             (chosenReviewerData ? (
-              <>
-                {chosenReviewerData ? (
-                  <ReviewerList
-                    chosenReviewerData={chosenReviewerData}
-                    setModalOpen={setModalOpen}
-                    modalOpen={modalOpen}
-                    maxRecruits={projectInfo.recruits}
-                  />
-                ) : (
-                  <p className="reviewer-list_no-reviewer">
-                    선정 리뷰어가 없습니다.
-                  </p>
-                )}
-              </>
+              <ReviewerList
+                chosenReviewerData={chosenReviewerData}
+                setModalOpen={setModalOpen}
+                modalOpen={modalOpen}
+                maxRecruits={projectInfo.recruits}
+              />
             ) : (
               loadingMessage
             ))}
