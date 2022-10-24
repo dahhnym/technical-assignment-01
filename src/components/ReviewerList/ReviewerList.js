@@ -5,6 +5,8 @@ import ArrowRight from './../../assets/arrow-right.svg';
 import BrandRequestHistoryModal from '../BrandRequestHistoryModal/BrandRequestHistoryModal';
 import { updateIsChosenStatus } from '../../utils';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import ArrowUpDown from './../../assets/arrow-updown.svg';
+import { tableHeaderItems } from '../../constant';
 
 const ReviewerList = ({
   applicantData,
@@ -15,23 +17,6 @@ const ReviewerList = ({
   fetchApplicantList,
   fetchChosenReviewerList,
 }) => {
-  const tableHeaderItems = [
-    '별표',
-    'NO',
-    '등급',
-    '이름(닉네임)',
-    '나이',
-    '성별',
-    '지역',
-    '활동분야',
-    '전략',
-    '추천수',
-    '취소율',
-    '평균 투데이',
-    'SNS 계정',
-    '내 브랜드 참여',
-  ];
-
   const [reviewerData, setReviewerData] = useState();
   const [applicantInfo, setApplicantInfo] = useState({});
   const [selectedId, setSelectedId] = useState(0);
@@ -95,12 +80,13 @@ const ReviewerList = ({
     <>
       <div className="reviewer-list">
         <ul className="table-header-container">
-          <li className="table-header-cell check">
+          <li className="table-header-cell">
             <input type="checkbox" />
           </li>
           {tableHeaderItems.map((item, idx) => (
             <li className="table-header-cell" key={idx}>
               {item}
+              {idx === 1 && <img src={ArrowUpDown} alt="정렬" />}
             </li>
           ))}
         </ul>
