@@ -2,7 +2,7 @@
 
 // column 15개중 14개 width 값
 $grid-cols: repeat(4, 3.5rem) 13rem repeat(3, 3.5rem) 9rem 32.5rem
-  repeat(2, 4.75rem) 6.6rem 5.875rem;
+  repeat(2, 4.75rem) 6rem 5.875rem;
 $table-row-active: #f7faff;
 $tab-active: #f0f3ff;
 $message-box-height: 1.93rem;
@@ -19,7 +19,7 @@ $message-box-height: 1.93rem;
 
 .table-header-container {
   display: grid;
-  grid-template-columns: $grid-cols minmax(6.8rem, 1fr);
+  grid-template-columns: $grid-cols minmax(6.7rem, 1fr);
   width: 100%;
   background-color: #f7f7fa;
   border-bottom: solid 1px $border-grey;
@@ -188,7 +188,7 @@ $message-box-height: 1.93rem;
   color: $white;
 }
 
-.submit-button {
+.confirm-button {
   height: 50px;
   padding: 0 22px;
 }

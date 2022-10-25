@@ -35,7 +35,10 @@ const ConfirmModal = ({
             에서 확인하실 수 있습니다.
           </li>
         </ul>
-        <button className="confirm-button" onClick={() => handleButtonClick()}>
+        <button
+          className="confirm-modla_button"
+          onClick={() => handleButtonClick()}
+        >
           확인
         </button>
       </div>
