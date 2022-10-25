@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './ReviewerList.scss';
 import BrandRequestHistoryModal from '../BrandRequestHistoryModal/BrandRequestHistoryModal';
 import { updateIsChosenStatus } from '../../utils';
-import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import SelectCompleteAlert from '../SelectCompleteAlert/SelectCompleteAlert';
 import TableHeader from './components/TableHeader';
 import ConfirmButton from './components/ConfirmButton';
 import TableBody from './components/TableBody';
@@ -21,7 +21,7 @@ const ReviewerList = ({
   const [checkedId, setCheckedId] = useState(0);
   const [checkedIdArr, setCheckedIdArr] = useState([]);
   const [isChosen, setIsChosen] = useState(false);
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   useEffect(() => {
     if (applicantData) {
@@ -38,7 +38,7 @@ const ReviewerList = ({
     const checkedCount = checkedIdArr.length;
     if (checkedCount > 0 && checkedCount <= maxRecruits) {
       updateIsChosenStatus(id, isChosenStatus);
-      setIsConfirmModalOpen(prev => !prev);
+      setIsAlertOpen(prev => !prev);
     }
   };
 
@@ -76,13 +76,13 @@ const ReviewerList = ({
         <BrandRequestHistoryModal
           setModalOpen={setModalOpen}
           applicantInfo={applicantInfo}
-          setIsConfirmModalOpen={setIsConfirmModalOpen}
+          setIsConfirmModalOpen={setIsAlertOpen}
         />
       )}
-      {isConfirmModalOpen && (
-        <ConfirmModal
+      {isAlertOpen && (
+        <SelectCompleteAlert
           checkedIdCount={checkedIdArr.length}
-          setIsConfirmModalOpen={setIsConfirmModalOpen}
+          setIsAlertOpen={setIsAlertOpen}
           isChosen={isChosen}
           fetchApplicantList={fetchApplicantList}
           fetchChosenReviewerList={fetchChosenReviewerList}

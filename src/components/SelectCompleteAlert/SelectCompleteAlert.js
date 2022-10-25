@@ -1,8 +1,8 @@
-import './ConfirmModal.scss';
+import './SelectCompleteAlert.scss';
 
-const ConfirmModal = ({
+const SelectCompleteAlert = ({
   checkedIdCount,
-  setIsConfirmModalOpen,
+  setIsAlertOpen,
   isChosen,
   fetchApplicantList,
   fetchChosenReviewerList,
@@ -12,7 +12,7 @@ const ConfirmModal = ({
   const reviewerListName = isChosen ? '신청' : '선정';
 
   const handleButtonClick = () => {
-    setIsConfirmModalOpen(prev => !prev);
+    setIsAlertOpen(prev => !prev);
     fetchChosenReviewerList();
     fetchApplicantList();
     resetCheckedStatus();
@@ -46,4 +46,4 @@ const ConfirmModal = ({
   );
 };
 
-export default ConfirmModal;
+export default SelectCompleteAlert;

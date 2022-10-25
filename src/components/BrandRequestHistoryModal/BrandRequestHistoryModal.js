@@ -12,7 +12,7 @@ const BrandRequestHistoryModal = ({
   setIsConfirmModalOpen,
 }) => {
   const [brandRequestHistoryData, setbrandRequestHistoryData] = useState();
-  const { id, name, nickname, isChosen } = applicantInfo;
+  const { id, name, nickName, isChosen } = applicantInfo;
   const fetchBrandRequestHistory = async () => {
     const result = await getBrandRequestHistory(id);
     const historyData = result[0].list;
@@ -29,7 +29,7 @@ const BrandRequestHistoryModal = ({
         <div>
           <CloseButton setModalOpen={setModalOpen} />
           <h2 className="modal-title">
-            {name}({nickname})님
+            {name}({nickName})님
             <br />내 브랜드 참여 횟수
           </h2>
         </div>

@@ -53,7 +53,7 @@ $message-box-height: 1.93rem;
   border-bottom: solid 1px $border-grey;
   text-align: center;
   display: grid;
-  grid-template-columns: $grid-cols minmax(6.2rem, 1fr);
+  grid-template-columns: $grid-cols minmax(6rem, 1fr);
   color: $table-body-text-color;
   & > div {
     display: flex;
