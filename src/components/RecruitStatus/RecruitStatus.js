@@ -58,7 +58,7 @@ const RecruitStatus = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div>
       <header className="header">
         <img className="logo" src={Logo} alt="리뷰쉐어" />
         <h1>모집현황 | 프로젝트 번호: {projectInfo ? projectInfo.id : ''}</h1>

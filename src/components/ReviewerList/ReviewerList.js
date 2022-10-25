@@ -72,7 +72,8 @@ const ReviewerList = ({
   };
 
   const handleSubmitButtonClick = (id, isChosenStatus) => {
-    if (checkedIdArr.length > 0 && checkedIdArr.length <= maxRecruits) {
+    const checkedCount = checkedIdArr.length;
+    if (checkedCount > 0 && checkedCount <= maxRecruits) {
       updateIsChosenStatus(id, isChosenStatus);
       setIsConfirmModalOpen(prev => !prev);
     }
@@ -261,7 +262,7 @@ const ReviewerList = ({
         <BrandRequestHistoryModal
           setModalOpen={setModalOpen}
           applicantInfo={applicantInfo}
-          handleModalButtonClick={handleSubmitButtonClick}
+          setIsConfirmModalOpen={setIsConfirmModalOpen}
         />
       )}
       {isConfirmModalOpen && (

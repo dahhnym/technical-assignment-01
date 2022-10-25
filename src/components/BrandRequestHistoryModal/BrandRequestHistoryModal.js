@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react';
 import { getBrandRequestHistory } from '../../api';
 import NaverBlog from './../../assets/naver-blog-icon.svg';
 import Instagram from './../../assets/instagram-icon.svg';
+import { updateIsChosenStatus } from '../../utils';
 
 const BrandRequestHistoryModal = ({
   setModalOpen,
   applicantInfo,
-  handleModalButtonClick,
+  setIsConfirmModalOpen,
 }) => {
   const [brandRequestHistoryData, setbrandRequestHistoryData] = useState();
   const { id, name, nickname, isChosen } = applicantInfo;
@@ -22,7 +23,10 @@ const BrandRequestHistoryModal = ({
 
     fetchBrandRequestHistory();
   }, []);
-
+  const handleModalButtonClick = (id, isChosenStatus) => {
+    updateIsChosenStatus(id, isChosenStatus);
+    setIsConfirmModalOpen(prev => !prev);
+  };
   return (
     <div className="overlay">
       <div className="modal-container">
