@@ -1,73 +1,18 @@
-const BASE_URL = 'http://localhost:9000';
-
-export const getProjectInfo = () => {
-  const data = fetch(`${BASE_URL}/project`).then(res => {
-    if (!res.ok) {
-      throw new Error(`예기치 않은 오류가 발생했습니다. ${res.status}`);
-    }
-    return res.json();
-  });
-  return data;
-};
-
-export const getApplicantData = () => {
-  const data = fetch(`${BASE_URL}/projectRequests?isChosen=false`).then(res => {
-    if (!res.ok) {
-      throw new Error(`예기치 않은 오류가 발생했습니다. ${res.status}`);
-    }
-    return res.json();
-  });
-  return data;
-};
-
-export const getBrandRequestHistory = userId => {
-  const data = fetch(`${BASE_URL}/brandRequestsHistory?userId=${userId}`).then(
-    res => {
-      if (!res.ok) {
-        throw new Error(`예기치 않은 오류가 발생했습니다. ${res.status}`);
-      }
-      return res.json();
-    },
-  );
-  return data;
-};
-
-export const getChosenReviewerData = () => {
-  const data = fetch(`${BASE_URL}/projectRequests?isChosen=true`).then(res => {
-    if (!res.ok) {
-      throw new Error(`예기치 않은 오류가 발생했습니다. ${res.status}`);
-    }
-    return res.json();
-  });
-  return data;
-};
+import axios from 'axios';
+import { BASE_URL } from './api';
 
 export const updateIsChosenStatus = (id, isChosenStatus) => {
-  fetch(`${BASE_URL}/projectRequests/${id}`, {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: JSON.stringify({ isChosen: !isChosenStatus }),
-  })
-    .then(res => {
-      console.log('update isChosen res status', res.status);
+  axios
+    .patch(`${BASE_URL}/projectRequests/${id}`, {
+      isChosen: !isChosenStatus,
     })
-    .catch(error => console.error(error));
+    .catch(err => console.error(err.message));
 };
 
 export const updateBookmarkStatus = (id, isBookmarkStatus) => {
-  fetch(`${BASE_URL}/projectRequests/${id}`, {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: JSON.stringify({ isBookmark: !isBookmarkStatus }),
-  })
-    .then(res => {
-      console.log('update bookmark res status', res.status);
+  axios
+    .patch(`${BASE_URL}/projectRequests/${id}`, {
+      isBookmark: !isBookmarkStatus,
     })
-    .catch(error => console.error(error));
+    .catch(err => console.error(err.message));
 };

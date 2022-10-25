@@ -6,7 +6,7 @@ import {
   getProjectInfo,
   getApplicantData,
   getChosenReviewerData,
-} from '../../utils';
+} from '../../api';
 
 const RecruitStatus = () => {
   const [projectInfo, setProjectInfo] = useState(0);
@@ -14,6 +14,10 @@ const RecruitStatus = () => {
   const [chosenReviewerData, setChosenReviewerData] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+
+  const loadingMessage = '데이터를 불러오는 중입니다...';
+
+  const [message, setMessage] = useState(loadingMessage);
 
   const handleTabClick = e => {
     const clickedTabIndex = e.target.value;
@@ -26,17 +30,23 @@ const RecruitStatus = () => {
       setProjectInfo(info);
     }
   };
+  const setErrorMessage = errorCode =>
+    setMessage(`데이터를 불러올 수 없습니다. Error code: ${errorCode}`);
 
   const fetchApplicantList = async () => {
     const data = await getApplicantData();
-    if (data) {
+    if (typeof data === 'number') {
+      setErrorMessage(data);
+    } else {
       setApplicantData(data);
     }
   };
 
   const fetchChosenReviewerList = async () => {
     const data = await getChosenReviewerData();
-    if (data) {
+    if (typeof data === 'number') {
+      setErrorMessage(data);
+    } else {
       setChosenReviewerData(data);
     }
   };
@@ -46,8 +56,6 @@ const RecruitStatus = () => {
     fetchProjectInfo();
     fetchChosenReviewerList();
   }, []);
-
-  const loadingMessage = '데이터를 불러오는 중입니다...';
 
   return (
     <div className="App">
@@ -62,14 +70,14 @@ const RecruitStatus = () => {
             value="0"
             onClick={e => handleTabClick(e)}
           >
-            신청 리뷰어 &#40;{applicantData.length}&#41;
+            신청 리뷰어 &#40;{applicantData?.length}&#41;
           </li>
           <li
             className={`tab ${tabIndex === 1 ? 'tab_active' : ''}`}
             value="1"
             onClick={e => handleTabClick(e)}
           >
-            선정 리뷰어({chosenReviewerData.length})
+            선정 리뷰어({chosenReviewerData?.length})
           </li>
         </ul>
         <div className="reviewer-list-container">
@@ -84,7 +92,7 @@ const RecruitStatus = () => {
                 fetchChosenReviewerList={fetchChosenReviewerList}
               />
             ) : (
-              loadingMessage
+              message
             ))}
           {tabIndex === 1 &&
             (chosenReviewerData ? (
@@ -97,7 +105,7 @@ const RecruitStatus = () => {
                 fetchChosenReviewerList={fetchChosenReviewerList}
               />
             ) : (
-              loadingMessage
+              message
             ))}
         </div>
       </section>

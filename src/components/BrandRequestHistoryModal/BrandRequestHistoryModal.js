@@ -1,7 +1,7 @@
 import './BrandRequestHistoryModal.scss';
 import Close from './../../assets/close.svg';
 import { useEffect, useState } from 'react';
-import { getBrandRequestHistory } from '../../utils';
+import { getBrandRequestHistory } from '../../api';
 import NaverBlog from './../../assets/naver-blog-icon.svg';
 import Instagram from './../../assets/instagram-icon.svg';
 
