@@ -3,6 +3,7 @@ $button-bg-color-inactive: #f7f7fa;
 $color-active: #0067ff;
 $text-color-inactive: #9da1a8;
 $text-color-black: #202225;
+$screen-height: 780px;
 
 .header {
   background-color: $color-active;
@@ -38,6 +39,10 @@ $text-color-black: #202225;
   &:hover {
     cursor: pointer;
   }
+  @media screen and (max-height: $screen-height) {
+    padding: 1rem 3rem;
+    font-size: 0.9rem;
+  }
 }
 
 .reviewer-list-container {
@@ -47,4 +52,7 @@ $text-color-black: #202225;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-height: $screen-height) {
+    height: 35rem;
+  }
 }

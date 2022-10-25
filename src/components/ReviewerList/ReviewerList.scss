@@ -1,7 +1,8 @@
 @import './../RecruitStatus/RecruitStatus.scss';
 
-$grid-cols: repeat(4, 1fr) 13rem repeat(3, 1fr) 10rem 33rem repeat(2, 1fr)
-  6.6rem 5.875rem 6.6rem;
+// column 15개중 14개 width 값
+$grid-cols: repeat(4, 3.5rem) 13rem repeat(3, 3.5rem) 9rem 32.5rem
+  repeat(2, 4.75rem) 6.6rem 5.875rem;
 $table-row-active: #f7faff;
 $text-highlight: #0067ff;
 $tab-active: #f0f3ff;
@@ -14,21 +15,27 @@ $message-box-height: 1.93rem;
   width: 95%;
   margin: 0 auto 20.5px;
   font-weight: 0.875rem;
+  @media screen and (max-height: $screen-height) {
+    height: 26rem;
+  }
 }
 
 .table-header-container {
   display: grid;
-  grid-template-columns: $grid-cols;
+  grid-template-columns: $grid-cols minmax(6.8rem, 1fr);
   width: 100%;
   background-color: #f7f7fa;
   border-bottom: solid 1px $border-grey;
+  overflow: auto;
+  li ~ li {
+    border-left: solid 1px $border-grey;
+  }
 }
 
 .table-header-cell {
   font-size: 0.875rem;
   color: $table-header-text-color;
   padding: 9px 0;
-  border-right: solid 1px $border-grey;
   text-align: center;
 }
 
@@ -37,7 +44,10 @@ $message-box-height: 1.93rem;
   height: 30rem;
   background-color: #fff;
   border-bottom: solid 1px $border-grey;
-  overflow-y: auto;
+  overflow: auto;
+  @media screen and (max-height: $screen-height) {
+    height: calc(100% - 3rem);
+  }
 }
 
 .table-body-row {
@@ -46,23 +56,22 @@ $message-box-height: 1.93rem;
   border-bottom: solid 1px $border-grey;
   text-align: center;
   display: grid;
-  grid-template-columns:
-    repeat(4, 1fr) 13rem repeat(3, 1fr) 10rem 33rem repeat(2, 1fr)
-    6.6rem 5.875rem 5.5rem;
+  grid-template-columns: $grid-cols minmax(6.2rem, 1fr);
   color: $table-body-text-color;
   & > div {
-    border-right: solid 1px $border-grey;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 3rem;
+  }
+  div ~ div {
+    border-left: solid 1px $border-grey;
   }
   &:hover {
     background-color: $table-row-active;
   }
 }
 
-// 체크박스 체크시
 .table-body-row_checked {
   background-color: $table-row-active;
 }
