@@ -72,9 +72,10 @@ const ReviewerList = ({
   };
 
   const handleSubmitButtonClick = (id, isChosenStatus) => {
-    if (checkedIdArr.length > maxRecruits) return;
-    updateIsChosenStatus(id, isChosenStatus);
-    setIsConfirmModalOpen(prev => !prev);
+    if (checkedIdArr.length > 0 && checkedIdArr.length <= maxRecruits) {
+      updateIsChosenStatus(id, isChosenStatus);
+      setIsConfirmModalOpen(prev => !prev);
+    }
   };
 
   const resetCheckedStatus = () => {
@@ -125,6 +126,7 @@ const ReviewerList = ({
                         className="table-body-row_checkbox"
                         type="checkbox"
                         value={data.id}
+                        checked={isChecked}
                         onChange={e => handleCheckBoxClick(e)}
                       />
                     </div>
