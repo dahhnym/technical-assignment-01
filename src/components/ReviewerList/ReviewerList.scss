@@ -1,13 +1,10 @@
-@import './../RecruitStatus/RecruitStatus.scss';
+@import './../../common.scss';
 
 // column 15개중 14개 width 값
 $grid-cols: repeat(4, 3.5rem) 13rem repeat(3, 3.5rem) 9rem 32.5rem
   repeat(2, 4.75rem) 6.6rem 5.875rem;
 $table-row-active: #f7faff;
-$text-highlight: #0067ff;
 $tab-active: #f0f3ff;
-$table-header-text-color: #52565d;
-$table-body-text-color: #202225;
 $message-box-height: 1.93rem;
 
 .reviewer-list {
@@ -42,7 +39,7 @@ $message-box-height: 1.93rem;
 .table-body-container {
   width: 100%;
   height: 30rem;
-  background-color: #fff;
+  background-color: $white;
   border-bottom: solid 1px $border-grey;
   overflow: auto;
   @media screen and (max-height: $screen-height) {
@@ -79,7 +76,7 @@ $message-box-height: 1.93rem;
 .button-view-sns {
   display: block;
   background-color: #02c639;
-  color: #fff;
+  color: $white;
   width: 4.375rem;
   height: 2rem;
   border-radius: 5px;
@@ -94,7 +91,7 @@ $message-box-height: 1.93rem;
   height: $message-box-height;
   padding-right: 11px;
   text-align: left;
-  background-color: #fff;
+  background-color: $white;
 }
 
 .button-dropdown {
@@ -138,7 +135,7 @@ $message-box-height: 1.93rem;
   z-index: 10;
   border: solid 1px $border-grey;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: $white;
   padding: 6.5px 11px;
   font-size: 0.75rem;
 }
@@ -148,19 +145,19 @@ $message-box-height: 1.93rem;
 }
 
 .table-body-row_count-valid {
-  color: $text-highlight;
+  color: $color-active;
   font-weight: 700;
 }
 
 .tab_active {
   background-color: $tab-active;
-  color: $text-highlight;
+  color: $color-active;
   font-weight: 500;
 }
 
 @mixin button-inactive {
   margin: 0 auto;
-  background-color: $button-bg-color-inactive;
+  background-color: $bg-color-light-grey;
   border-radius: 5px;
   font-size: 1rem;
   font-weight: 500;
@@ -173,7 +170,7 @@ $message-box-height: 1.93rem;
 @mixin button-active-white {
   display: block;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: $white;
   border: solid 1px $border-grey;
   border-radius: 5px;
   font-size: 1rem;
@@ -188,7 +185,7 @@ $message-box-height: 1.93rem;
   border-radius: 5px;
   font-size: 1rem;
   font-weight: 500;
-  color: #fff;
+  color: $white;
 }
 
 .submit-button {

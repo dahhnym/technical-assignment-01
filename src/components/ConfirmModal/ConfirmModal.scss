@@ -1,3 +1,5 @@
+@import './../../common.scss';
+
 .overlay {
   position: fixed;
   top: 0;
@@ -13,7 +15,7 @@
 }
 
 .confirm-modal-container {
-  background-color: #fff;
+  background-color: $white;
   width: 25.875rem;
   height: 10rem;
   border-radius: 10px;
@@ -33,7 +35,7 @@
 .confirm-button {
   border-top: solid 1px #e6e8ed;
   width: inherit;
-  color: #0067ff;
+  color: $color-active;
   font-weight: 500;
   font-size: 1rem;
 }

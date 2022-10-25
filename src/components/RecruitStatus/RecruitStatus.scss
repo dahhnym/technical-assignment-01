@@ -1,13 +1,13 @@
-$border-grey: #e1e3e9;
+@import './../../common.scss';
+
 $button-bg-color-inactive: #f7f7fa;
 $color-active: #0067ff;
 $text-color-inactive: #9da1a8;
 $text-color-black: #202225;
-$screen-height: 780px;
 
 .header {
   background-color: $color-active;
-  color: #fff;
+  color: $white;
   height: 3.75rem;
   display: flex;
   padding-left: 1.875rem;
@@ -23,7 +23,7 @@ $screen-height: 780px;
   border: solid 1px $border-grey;
   width: 95%;
   margin: 2.5rem auto 0;
-  background-color: #fff;
+  background-color: $white;
 }
 
 .tab-container {
